@@ -1,11 +1,10 @@
-import styled from "styled-components";
 import React, { useState, useEffect, useContext } from "react";
 import getDishes from "../services/dish/getDish";
 import DishCategoryForm from "./forms/DishCategoryForm";
 import DishItem from "./DishItem";
 import ModalHook, { useModal } from "../hooks/modalHook";
 import deleteDishCategory from "../services/dishCategory/deleteDishCategory.js";
-import { CategoriesContext, Context, ToastVisibilityContext, DishesContext } from "../context/userContext";
+import { CategoriesContext, Context, ToastVisibilityContext } from "../context/userContext";
 import editDishCategory from "../services/dishCategory/editDishCategory";
 import ConfirmationYesNo from "./popups/ConfirmationYesNo";
 import { ButtonDeleteCategory, ButtonEditCategory, CategoryButton, CategoryWrapper, DishListWrapper, } from "../styles/css";

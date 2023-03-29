@@ -15,7 +15,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 class DishSerializer(serializers.ModelSerializer):
 
-    # image = serializers.FileField()
+    image = serializers.FileField(required=False)
     parser_classes = (MultiPartParser,)
 
     class Meta:

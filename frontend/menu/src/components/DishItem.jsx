@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useEffect, useState, useContext } from "react";
 import ModalHook, { useModal } from "../hooks/modalHook";
-import NewDish from "./forms/DishForm";
+import DishForm from "./forms/DishForm";
 import { CategoriesContext, Context, DishesContext, ToastVisibilityContext } from "../context/userContext";
 import editDish from "../services/dish/editDish";
 import deleteDish from "../services/dish/deleteDish.js";
@@ -54,7 +54,6 @@ const DishItem = (props) => {
       const dishesOfCategorySelected = categorySelected['dishes']
       const indexToEdit = dishesOfCategorySelected.indexOf(dish)
       categorySelected['dishes'].splice(indexToEdit, 1) //modifies existing array
-      console.log("dishCategories", dishCategories)
       setDish(null)
       displayToast('Category "' + String(nameDeleted) + '" has been deleted!', 'success')
       onDeleteDish()
@@ -74,9 +73,9 @@ const DishItem = (props) => {
   useEffect(() => {
     setDish(props.dish);
     setConfirmationMessage('Are you sure you want to delete the category?')
-  }, [dishCategories]);
+  }, []);
 
-  //TO REFACTOR: Unify with onSubmitNewDish in DishList.jsx page
+  //TO REFACTOR: Unify with onSubmit DishForm in DishList.jsx page
   const onSubmit = (formData) => {
     let payload = new FormData();
 
@@ -96,7 +95,6 @@ const DishItem = (props) => {
 
     editDish(payload, formData.id, tokenValue, csfrTokenValue)
     .then(data => {
-      // console.log(data)
       if(data.Error){
         throw data
       }
@@ -118,7 +116,7 @@ const DishItem = (props) => {
         <DishWrapper>
         <ModalHook
           modalHook={editDishHook}
-          content={<NewDish data={dish} onSubmit={onSubmit} />}
+          content={<DishForm data={dish} onSubmit={onSubmit} />}
         />
         <ModalHook
           modalHook={confirmationModal}
