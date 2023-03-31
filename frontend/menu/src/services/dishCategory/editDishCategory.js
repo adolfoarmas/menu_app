@@ -21,8 +21,7 @@ export default async function editDishCategory(payload, dishCategoryId, token, c
     return fetch(DISH_CATEGORIES_END_POINT + dishCategoryId + '/', {
         method: 'PATCH',
         headers: {
-            // 'Content-Type': 'application/json',
-            'Authorization': `Token` + token, 
+            'Authorization': `Token ` + token, 
             'X-CSRFToken':  csfrToken
         },
         body: payload

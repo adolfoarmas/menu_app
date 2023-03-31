@@ -13,7 +13,7 @@ export default async function getUserLoggedTokenData(username, token, csfrToken,
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Token` + token, 
+            'Authorization': `Token ` + token, 
             'X-CSRFToken':  csfrToken
         },
         //body: JSON.stringify(payload)

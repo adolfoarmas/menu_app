@@ -29,8 +29,8 @@ return fetch(USER_LOGOUT_END_POINT, {
         window.localStorage.removeItem('logedUserToken')
         window.localStorage.removeItem('logedUserId')
         window.localStorage.removeItem('logedUserName')
-        document.cookie = "sessionid=; Max-Age=0;secure; path=/"
-        document.cookie = "csrftoken=; Max-Age=0;secure; path=/"
+        // document.cookie = "sessionid=; Max-Age=0;secure; path=/"
+        // document.cookie = "csrftoken=; Max-Age=0;secure; path=/"
         return data.json()
     }
     return data

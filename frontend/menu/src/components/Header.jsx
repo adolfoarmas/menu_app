@@ -16,18 +16,18 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [logOut, setLogOut] = useState(false);
-  const { token, csfrToken, userLoggedId, userLoggedName } =
+  const { key, csfrToken, userLoggedId, userLoggedName } =
     useContext(Context);
   const navigate = useNavigate();
   const [userLoggedNameValue, setUserLoggedNameValue] = userLoggedName;
-  const [tokenValue, setTokenValue] = token;
+  const [userLoggedKey, setUserLoggedkey] = key;
   const [csfrTokenValue, setCsfrTokenValue] = csfrToken;
 
   function handleLogout(e) {
     e.preventDefault();
-    logoutUser(tokenValue)
+    logoutUser(userLoggedKey)
       .then(() => {
-        setTokenValue(null);
+        setUserLoggedkey(null);
         setCsfrTokenValue(null);
         setUserLoggedNameValue(null);
       })
@@ -55,7 +55,7 @@ const Header = () => {
           ) : (
             <></>
           )}
-          <ButtonNormal hidden={!tokenValue} onClick={handleLogout}>
+          <ButtonNormal hidden={!userLoggedKey} onClick={handleLogout}>
             <FontAwesomeIcon icon={faRightFromBracket} /><p>Log out</p>
           </ButtonNormal>
         </ButtonPanelDiv>

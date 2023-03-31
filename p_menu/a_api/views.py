@@ -1,22 +1,10 @@
 #from django.contrib.auth.models import User
-import os
-from django import views
-from a_users.models import UserProfile
-from django.http import JsonResponse
-from django.shortcuts import render
 from a_menu.models import Dish, DishCategory
-from rest_framework import generics, permissions, viewsets, filters
-from rest_framework.generics import ListAPIView, RetrieveAPIView
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from rest_framework.response import Response
-from rest_framework.authentication import TokenAuthentication
+from rest_framework import generics
 from .permissions.permissions import IsAuthenticatedUserOrReadOnlyUser, IsAuthenticatedUserOrReadOnlyMenu
-from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.settings import api_settings
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth import get_user_model
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import status
-from django.conf import settings
 
 
 #from rest_framework.settings import api_settings
@@ -87,3 +75,6 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = get_user_model().objects.all()
     serializer_class = UserProfileSerializer
     
+    # @ensure_csrf_cookie
+    # def dispatch(self, request, *args, **kwargs):
+    #     return super().dispatch(request, *args, **kwargs)

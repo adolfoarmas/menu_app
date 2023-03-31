@@ -22,7 +22,7 @@ export default async function editDish(payload, dishId, token, csfrToken){
         method: 'PUT',
         headers: {
             // 'Content-Type': 'multipart/form-data',
-            'Authorization': `Token` + token, 
+            'Authorization': `Token ` + token, 
             'X-CSRFToken':  csfrToken
         },
         body: payload

@@ -21,8 +21,7 @@ export default async function deleteDishCategory(dishCategoryId, token, csfrToke
     return fetch(DISH_CATEGORIES_END_POINT + dishCategoryId + '/', {
         method: 'DELETE',
         headers: {
-            // 'Content-Type': 'application/json',
-            'Authorization': `Token` + token, 
+            'Authorization': `Token ` + token, 
             'X-CSRFToken':  csfrToken
         },
         //body: JSON.stringify(payload)

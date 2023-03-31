@@ -13,10 +13,10 @@ import createDish from "../services/dish/createDish";
 import {ButtonNormal, ToolBarButton, ToolBarWrapper, } from "../styles/css"
 
 const ToolBar = () => {
-  const { token, csfrToken } = useContext(Context);
+  const { key, csfrToken } = useContext(Context);
   const [dishCategories, setDishCategories] = useContext(CategoriesContext);
   const [toastVisible, setToastVisible, toastMessage, setToastMessage, toastType, setToastType,] = useContext(ToastVisibilityContext);
-  const [tokenValue] = token;
+  const [userLoggedKey] = key;
   const [csfrTokenValue] = csfrToken;
 
   const newDishHook = useModal("Dish");
@@ -53,7 +53,7 @@ const ToolBar = () => {
       JSON.parse(window.localStorage.getItem("logedUserId"))
     );
 
-    createDish(payload, tokenValue, csfrTokenValue)
+    createDish(payload, userLoggedKey, csfrTokenValue)
       .then((data) => {
         // console.log(data)
         if (data.Error) {
@@ -92,7 +92,7 @@ const ToolBar = () => {
       "created_by",
       JSON.parse(window.localStorage.getItem("logedUserId"))
     );
-    createDishCategory(payload, tokenValue, csfrTokenValue)
+    createDishCategory(payload, userLoggedKey, csfrTokenValue)
       .then((data) => {
         // console.log(data)
         if (data.Error) {
@@ -117,7 +117,7 @@ const ToolBar = () => {
 
   return (
     <>
-        {tokenValue? 
+        {userLoggedKey? 
             (<ToolBarWrapper>
         <ModalHook
             modalHook={newDishHook}

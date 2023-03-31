@@ -13,12 +13,12 @@ import { faPenToSquare, faTrashCan, faCaretUp, faCaretDown } from '@fortawesome/
 
 
 const CategoryItem = ({ data }) => {
-  const { token, csfrToken } = useContext(Context);
+  const { key, csfrToken } = useContext(Context);
   const [dishCategories, setDishCategories] = useContext(CategoriesContext);
   const [dishes, setDishes] = useState([]);
   const [toastVisible, setToastVisible, toastMessage, setToastMessage, toastType, setToastType] = useContext(ToastVisibilityContext)
 
-  const [tokenValue] = token;
+  const [userLoggedKey] = key;
   const [csfrTokenValue] = csfrToken;
 
   const [dishesVisible, setDishesVisible] = useState(false);
@@ -44,7 +44,7 @@ const CategoryItem = ({ data }) => {
 
 
   const onConfirmateDeleteDishCategory = () => {
-    deleteDishCategory(category.id, tokenValue, csfrTokenValue)
+    deleteDishCategory(category.id, userLoggedKey, csfrTokenValue)
     .then(data => {
       // console.log(data)
       if(data.Error){
@@ -88,7 +88,7 @@ const CategoryItem = ({ data }) => {
     payload.append("created_by", JSON.parse(window.localStorage.getItem("logedUserId"))
     );
 
-    editDishCategory(payload, formData.id, tokenValue, csfrTokenValue)
+    editDishCategory(payload, formData.id, userLoggedKey, csfrTokenValue)
     .then(data => {
       // console.log(data)
       if(data.Error){
@@ -124,7 +124,7 @@ const CategoryItem = ({ data }) => {
 
         </CategoryButton>
 
-        {tokenValue && <><ButtonEditCategory
+        {userLoggedKey && <><ButtonEditCategory
           onClick={onEditDishCategoryModal}
         >
           <FontAwesomeIcon icon={faPenToSquare} />

@@ -19,7 +19,7 @@ const UserContextProvider = ({ children }) => {
     const apiData = fetchCategories;
     const dishCategoriesApi = apiData.read();
 
-    const [userLogged, setUserLogged] = useState(null)
+    const [userLoggedKey, setUserLoggedKey] = useState(null)
     const [csrfToken, setCsrfToken] = useState(null)
     const [userLoggedId, setUserLoggedId] = useState(null)
     const [userLoggedName, setUserLoggedName] = useState(null)
@@ -54,7 +54,7 @@ const UserContextProvider = ({ children }) => {
 
 
         if(getUserLoggedTokenValue) {
-          setUserLogged(getUserLoggedTokenValue)
+          setUserLoggedKey(getUserLoggedTokenValue)
           setCsrfToken(getCsrftokenValue)
           setUserLoggedId(getUserLoggedId)
           setUserLoggedName(getUserLoggedName)
@@ -69,7 +69,7 @@ const UserContextProvider = ({ children }) => {
 
     return (
     
-      <Context.Provider value={{'token':[userLogged, setUserLogged], 'csfrToken': [csrfToken, setCsrfToken], 'userLoggedId': [userLoggedId, setUserLoggedId], 'userLoggedName': [userLoggedName, setUserLoggedName]}}>
+      <Context.Provider value={{'key':[userLoggedKey, setUserLoggedKey], 'csfrToken': [csrfToken, setCsrfToken], 'userLoggedId': [userLoggedId, setUserLoggedId], 'userLoggedName': [userLoggedName, setUserLoggedName]}}>
         <CategoriesContext.Provider value={[dishCategories, setDishCategories]}>
           <UpdateViewContext.Provider value={[updateView, setUpdateView]}>
             <ToastVisibilityContext.Provider value={[toastVisible, setToastVisible, toastMessage, setToastMessage, toastType, setToastType]}>

@@ -12,12 +12,15 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from dotenv import dotenv_values
+from corsheaders.defaults import default_headers
 from os.path import join, dirname
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent #'/home/<user>/menu_app/p_menu'
 
+dotenv_path = join(BASE_DIR, 'secrets.env')
+env_values = dotenv_values(dotenv_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -28,8 +31,7 @@ SECRET_KEY = 'django-insecure-w_dqlg1yi1l@a-q@=y!bd)b%p=b630vuzq=r%wk4v@+pw+9rdz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 
@@ -99,7 +101,6 @@ CORS_ALLOWED_ORIGINS = (
     "http://localhost:8000"
 )
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
 
 ROOT_URLCONF = 'p_menu.urls'
 
@@ -131,8 +132,12 @@ WSGI_APPLICATION = 'p_menu.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':  'postgres', #env_values['DB_NAME'],
+        'USER': 'postgres',#env_values['DB_USER'],
+        'PASSWORD': 'postgres',#env_values['DB_PASSWORD'],
+        'HOST': 'db',
+        'PORT': '5432',
     }
 }
 
@@ -174,17 +179,11 @@ USE_TZ = True
 #DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 #CDN
 
-dotenv_path = join(BASE_DIR, 'secrets.env')
-print(dotenv_path)
-env_values = dotenv_values(dotenv_path)
-
 CLOUDINARY_STORAGE = {
     "CLOUD_NAME" : env_values['CLOUD_NAME'],
     "API_KEY" : env_values['API_KEY'],
     "API_SECRET" : env_values['API_SECRET'],
 }
-
-
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -205,6 +204,16 @@ AUTH_USER_MODEL = 'a_users.UserProfile'
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ORIGIN_WHITELIST = (
-    'localhost:3000/'
+    'localhost:3000',
+    'localhost:8000',
 )
+
+CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:3000"] 
+
+"""
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
+"""
 

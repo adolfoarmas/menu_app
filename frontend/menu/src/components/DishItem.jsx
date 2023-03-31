@@ -12,13 +12,13 @@ import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 
 const DishItem = (props) => {
 
-  const { token, csfrToken } = useContext(Context);
+  const { key, csfrToken } = useContext(Context);
   const [toastVisible, setToastVisible, toastMessage, setToastMessage, toastType, setToastType] = useContext(ToastVisibilityContext)
   const [dishCategories, setDishCategories] = useContext(CategoriesContext)
 
   const [dishes, setDishes] = useContext(DishesContext);
 
-  const [tokenValue] = token;
+  const [userLoggedKey] = key;
   const [csfrTokenValue] = csfrToken;
 
   let [dish, setDish] = useState({});
@@ -40,7 +40,7 @@ const DishItem = (props) => {
   };
 
   const onConfirmateDeleteDish = () => {
-    deleteDish(dish.id, tokenValue, csfrTokenValue)
+    deleteDish(dish.id, userLoggedKey, csfrTokenValue)
     .then(data => {
       // console.log(data)
       if(data.Error){
@@ -93,7 +93,7 @@ const DishItem = (props) => {
       JSON.parse(window.localStorage.getItem("logedUserId"))
     );
 
-    editDish(payload, formData.id, tokenValue, csfrTokenValue)
+    editDish(payload, formData.id, userLoggedKey, csfrTokenValue)
     .then(data => {
       if(data.Error){
         throw data
@@ -136,7 +136,7 @@ const DishItem = (props) => {
             {dish.currency} {dish.price}
           </p>
         </DishPriceCurrencyWrapper>
-        {tokenValue && <>
+        {userLoggedKey && <>
         <DishEditButton onClick={editDishModal}>
         <FontAwesomeIcon icon={faPenToSquare} />
         </DishEditButton>

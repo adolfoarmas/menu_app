@@ -22,7 +22,7 @@ export default async function createDish(payload, token, csfrToken,){
         method: 'POST',
         headers: {
             // 'Content-Type': 'multipart/form-data', //'application/json',
-            'Authorization': `Token` + token, 
+            'Authorization': `Token ` + token, 
             'X-CSRFToken':  csfrToken,
         },
         body: payload

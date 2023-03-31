@@ -1,4 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
+import Cookies from "js-cookie";
+import React, { useState, useContext } from "react";
 import { Navigate } from "react-router-dom";
 import loginUser from "../services/loginUser.js";
 import getUserData from "../services/user/getUserData";
@@ -17,7 +18,7 @@ import ToastMessage from "../components/ToastMessage.jsx";
 const UserLogin = () => {
   const [username, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
-  const [errorText, setErrorText] = useState("");
+  const [userData, setUserData] = useState([]);
 
   const [
     toastVisible,
@@ -28,20 +29,12 @@ const UserLogin = () => {
     setToastType,
   ] = useContext(ToastVisibilityContext);
 
-  const { token, csfrToken, userLoggedId, userLoggedName } =
-    useContext(Context);
+  const { key, csfrToken, userLoggedId, userLoggedName } = useContext(Context);
 
   const [csfrTokenValue, setCsfrTokenValue] = csfrToken;
-  const [tokenValue, setTokenValue] = token;
-  const [userLoggedIdValue, setUserLoggedValue] = userLoggedId;
+  const [userLoggedKey, setUserLoggedkey] = key;
+  const [userLoggedIdValue, setUserLoggedIdValue] = userLoggedId;
   const [userLoggedNameValue, setUserLoggedNameValue] = userLoggedName;
-
-  const getCsrfToken = () => {
-    return document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("csrftoken="))
-      ?.split("=")[1];
-  };
 
   const displayToast = (message, type) => {
     setToastMessage(message);
@@ -49,48 +42,57 @@ const UserLogin = () => {
     setToastVisible(true);
   };
 
+  const getUserDataResponse = (userDataResponse) => {
+    for (let i = 0; i <= userDataResponse.length; i++) {
+      const apiUsername = userDataResponse[i]["username"];
+      if (username.toLowerCase() === apiUsername.toLowerCase()) {
+        const logedUserId = userDataResponse[i]["id"];
+        const logedserName = userDataResponse[i]["username"];
+        window.localStorage.setItem("logedUserId", logedUserId);
+        window.localStorage.setItem("logedUserName", logedserName);
+        setUserLoggedIdValue(userDataResponse[i]["id"]);
+        setUserLoggedNameValue(userDataResponse[i]["username"]);
+        break;
+      }
+
+      setUserName(null);
+      setPassword(null);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await loginUser({
+    const csfrTokenInCookies = Cookies.get('csrftoken');
+    setCsfrTokenValue(csfrTokenInCookies);
+
+    const tokenResponse = await loginUser({
       username,
       password,
-    })
-      .then((data) => {
-        console.log("data", data);
-        if (data.Error) {
-          throw data;
-        }
+    }).then((data) => {
+      if (data.Error) {
+        throw data;
+      }
+      return data;
+    });
+
+    const tokenResponseKey = tokenResponse.key;
+    window.localStorage.setItem("logedUserToken", tokenResponseKey);
+    setUserLoggedkey(tokenResponseKey);
+    
+    await getUserData(username, tokenResponseKey, csfrTokenInCookies)
+    .then((data) => {
+      setUserData(data);
+      getUserDataResponse(data);
         return data;
-      })
-      .then((data) => {
-        console.log("data", data);
-        window.localStorage.setItem("logedUserToken", data.key);
-        setTokenValue(data.key);
-        getUserData(username).then((data) => {
-          for (let i = 0; i <= data.length; i++) {
-            const ApiUsername = data[i]["username"];
-            if (username.toLowerCase() === ApiUsername.toLowerCase()) {
-              const logedUserId = data[i]["id"];
-              const logedserName = data[i]["username"];
-              window.localStorage.setItem("logedUserId", logedUserId);
-              window.localStorage.setItem("logedUserName", logedserName);
-              setCsfrTokenValue(getCsrfToken());
-              setUserLoggedValue(data[i]["id"]);
-              setUserLoggedNameValue(data[i]["username"]);
-              break;
-            }
-          }
-          setUserName(null);
-          setPassword(null);
-        });
       })
       .catch((error) => {
         console.log("error", error);
         displayToast(error, "error");
       });
-  };
 
+
+  };
   return (
     <FormLoginDiv>
       {toastVisible && (
@@ -101,10 +103,11 @@ const UserLogin = () => {
       <FormLogin className="login-form-form" onSubmit={(e) => handleSubmit(e)}>
         <FormFieldNameLabel>
           <p>Username</p>
-          <input 
-          type="text" 
-          required
-          onChange={(e) => setUserName(e.target.value)} />
+          <input
+            type="text"
+            required
+            onChange={(e) => setUserName(e.target.value)}
+          />
         </FormFieldNameLabel>
         <FormFieldNameLabel>
           <p>Password</p>
@@ -122,7 +125,7 @@ const UserLogin = () => {
           </a>
         </LoginButtonGroupDiv>
       </FormLogin>
-      {tokenValue && <Navigate to="/" replace={true} />}
+      {userLoggedKey && userLoggedIdValue && userLoggedNameValue && <Navigate to="/" replace={true} />}
     </FormLoginDiv>
   );
 };

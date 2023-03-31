@@ -22,7 +22,7 @@ export default async function createDishCategory(payload, token, csfrToken,){
         method: 'POST',
         headers: {
             // 'Content-Type': 'application/json',
-            'Authorization': `Token` + token, 
+            'Authorization': `Token ` + token, 
             'X-CSRFToken':  csfrToken
         },
         body: payload

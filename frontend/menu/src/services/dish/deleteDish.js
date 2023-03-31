@@ -21,7 +21,7 @@ export default async function deleteDish(dishId, token, csfrToken,){
         method: 'DELETE',
         headers: {
             // 'Content-Type': 'application/json',
-            'Authorization': `Token` + token, 
+            'Authorization': `Token ` + token, 
             'X-CSRFToken':  csfrToken
         },
     })
