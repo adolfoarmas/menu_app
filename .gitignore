@@ -1,5 +1,0 @@
-**/.env
-env/
-**/__pycache__/
-frontend/menu/node_modules/
-p_menu/secrets.env
