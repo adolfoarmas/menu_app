@@ -1,0 +1,157 @@
+html {
+  /*background: url("/home/adolfo/menu_app/frontend/menu/img/iStock-533776553.jpg") no-repeat center center fixed;*/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+
+}
+
+.App {
+  text-align: center;
+  background-color: #282c34;
+  flex-basis: 0;
+  flex-grow: 2;
+  min-width: 70%;
+  /* width: 1200px;
+  max-width: calc(100% - 20px);
+  margin: 0 auto;
+  padding: 0 10px; */
+}
+
+.App-header {
+  background-color: #979ba37b;
+  /* min-height: 10vh;
+  display: flex; */
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* font-size: calc(10px + 2vmin); */
+  color: white;
+}
+
+.App-header-logo {
+  border-radius: 100%;
+  width: 120px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.new-dish-form-form-picture {
+  display: flex;
+  flex-direction: row;
+}
+
+.new-dish-form-form-picture-title {
+  margin-right: 5px;
+}
+
+.new-dish-form-form-price {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.new-dish-form-form-price-price{
+  width: 120px;
+  margin-right: 5px;
+}
+.new-dish-form-form-price-currency{
+  width: 80px;
+}
+
+/* @keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
+
+
+.dish-category {
+
+  display:grid;
+  color: #282c34;
+  background-color: chartreuse;
+  align-self: center;
+  border: none;
+  width: 100%;
+
+}
+
+.dish-list-item {
+  display:grid;
+  justify-content: center;
+
+}
+
+.dish-element {
+  display:flex ;
+  color: aliceblue;
+  background-color: #282c34;
+  width: 60rem;
+  padding: 2px;
+  margin: 15px 0px 15px 0px;
+  border-radius: 5px;
+  align-content: center;
+  justify-content: baseline;
+}
+
+.dish-title-description {
+  display:grid;
+  align-content: center;
+}
+
+.dish-price {
+  display:grid;
+  align-content: center;
+  width: 250px;
+}
+
+.login-form {
+  display:grid;
+  color: aliceblue;
+  margin: 10px;
+  border-radius: 5px;
+  align-content: center;
+}
+
+.login-form-form {
+  align-content: center;
+  height: 300px;
+  width: 500px;
+  display:grid;
+}
+
+
+.transparent-button {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+
+.new-dish-form {
+  padding:  25px 100px 25px 100px;
+  display: flex;
+  justify-content: start;
+  align-content: start;
+
+}
+
+.new-dish-form-form {
+  color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-content: start;
+}
