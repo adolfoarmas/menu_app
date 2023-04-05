@@ -47,9 +47,16 @@ pipeline {
       stage('Deploy docker-image') {
         steps {
           // If the Dockerhub authentication stopped, do it again
-          //sh 'docker login'
-          //sh "docker push ${REGISTRY}:${BUILD_NUMBER}"
-          echo 'skip pushing images to docker hub...'
+          sh "docker login"
+          sh "docker tag menu_api ${REGISTRY}/menu_api:${BUILD_NUMBER}"
+          sh "docker push menu_api ${REGISTRY}/menu_api:${BUILD_NUMBER}"
+          sh "docker tag menu_frontend ${REGISTRY}/menu_frontend:${BUILD_NUMBER}"
+          sh "docker push menu_frontend ${REGISTRY}/menu_frontend:${BUILD_NUMBER}"
+          sh "docker tag menu_db ${REGISTRY}/menu_db:${BUILD_NUMBER}"
+          sh "docker push menu_db ${REGISTRY}/menu_db:${BUILD_NUMBER}"
+          sh "docker tag menuuu_nginx ${REGISTRY}/menuuu_nginx:${BUILD_NUMBER}"
+          sh "docker push menuuu_nginx ${REGISTRY}/menuuu_nginx:${BUILD_NUMBER}"
+          // echo 'skip pushing images to docker hub...'
         }
       }
   }

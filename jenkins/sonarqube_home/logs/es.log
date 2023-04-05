@@ -1,3 +1,9 @@
 2023.04.05 13:09:18 WARN  es[][o.e.t.ThreadPool] timer thread slept for [12.5h/45282531ms] on absolute clock which is above the warn threshold of [5000ms]
 2023.04.05 13:09:18 WARN  es[][o.e.t.ThreadPool] execution of [ReschedulingRunnable{runnable=org.elasticsearch.monitor.jvm.JvmGcMonitorService$1@609fbc1f, interval=1s}] took [5328ms] which is above the warn threshold of [5000ms]
 2023.04.05 13:09:18 WARN  es[][o.e.t.ThreadPool] timer thread slept for [5.3s/5328048764ns] on relative clock which is above the warn threshold of [5000ms]
+2023.04.05 18:14:43 WARN  es[][o.e.t.ThreadPool] timer thread slept for [50.5m/3030524ms] on absolute clock which is above the warn threshold of [5000ms]
+2023.04.05 18:14:58 WARN  es[][o.e.t.ThreadPool] absolute clock went backwards by [296ms/296ms] while timer thread was sleeping
+2023.04.05 21:07:49 WARN  es[][o.e.t.ThreadPool] timer thread slept for [41.1m/2471441ms] on absolute clock which is above the warn threshold of [5000ms]
+2023.04.05 21:07:49 WARN  es[][o.e.t.ThreadPool] timer thread slept for [5.5s/5504813658ns] on relative clock which is above the warn threshold of [5000ms]
+2023.04.05 21:08:04 WARN  es[][o.e.t.ThreadPool] absolute clock went backwards by [507ms/507ms] while timer thread was sleeping
+2023.04.05 22:25:24 INFO  es[][o.e.m.j.JvmGcMonitorService] [gc][41214] overhead, spent [294ms] collecting in the last [1s]
