@@ -17,19 +17,21 @@ pipeline {
   stages {
       stage('Preparation') {
         steps {
-          echo 'Hello pipeline'
+          sh '''
+            echo 'docker & docker compose information'
+            docker info
+            docker version
+            docker compose version
+          '''
         }
       }
+
       stage('Checkout') {
         steps {
         // Get Github repo using Github credentials (previously added to Jenkins credentials)
         checkout([$class: 'GitSCM', branches: [[name: '*/to_server']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/adolfoarmas/menu_app.git']]])        }
       }
-      stage('Install dependencies') {
-        steps {
-          echo 'skiping dependencies installation...'
-        }
-      }
+
       stage('Unit tests') {
         steps {
           echo 'skiping tests running...'
@@ -38,7 +40,8 @@ pipeline {
       stage('Build docker-image') {
         steps {
         //  sh "docker build -t ${REGISTRY}:${BUILD_NUMBER} . "
-          sh docker compose build .
+          sh 'docker compose build'
+          sh 'docker compose ps'
         }
       }
       stage('Deploy docker-image') {
