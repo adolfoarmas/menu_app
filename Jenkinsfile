@@ -10,6 +10,10 @@ def qualityGateValidation(qg) {
 pipeline {
   agent any
 
+  environment {
+    REGISTRY='adolfoarmas90/menu-app'
+  }
+
   stages {
       stage('Preparation') {
         steps {
