@@ -33,7 +33,7 @@ pipeline {
       }
       stage('Build docker-image') {
         steps {
-         sh "docker build -t ${REGISTRY}:${BUILD_NUMBER} . "
+         sh "docker build -it ${REGISTRY}:${BUILD_NUMBER} . "
         // sh docker compose up --build -t ${REGISTRY}:${BUILD_NUMBER}
         }
       }
