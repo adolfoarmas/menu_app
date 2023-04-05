@@ -11,7 +11,7 @@ pipeline {
   agent any
 
   environment {
-    REGISTRY='adolfoarmas90/menu-app'
+    REGISTRY='adolfoarmas90'
   }
 
   stages {
