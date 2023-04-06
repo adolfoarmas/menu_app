@@ -52,10 +52,10 @@ pipeline {
           sh "docker push ${REGISTRY}/menu_api:${BUILD_NUMBER}"
           sh "docker tag menu_frontend ${REGISTRY}/menu_frontend:${BUILD_NUMBER}"    
           sh "docker push ${REGISTRY}/menu_frontend:${BUILD_NUMBER}"
-          sh "docker tag postgres ${REGISTRY}/postgres:${BUILD_NUMBER}"
+          sh "docker tag menu_db:latest ${REGISTRY}/menu_db:${BUILD_NUMBER}"
           sh "docker push ${REGISTRY}/menu_db:${BUILD_NUMBER}"
-          sh "docker tag nginx ${REGISTRY}/nginx:${BUILD_NUMBER}"
-          sh "docker push ${REGISTRY}/nginx:${BUILD_NUMBER}"
+          sh "docker tag menu_nginx:latest ${REGISTRY}/menu_nginx:${BUILD_NUMBER}"
+          sh "docker push ${REGISTRY}/menu_nginx:${BUILD_NUMBER}"
           // echo 'skip pushing images to docker hub...'
         }
       }
