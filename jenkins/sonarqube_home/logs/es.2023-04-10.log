@@ -1,0 +1,5 @@
+2023.04.10 12:10:39 WARN  es[][o.e.t.ThreadPool] timer thread slept for [14.3h/51788140ms] on absolute clock which is above the warn threshold of [5000ms]
+2023.04.10 23:10:42 WARN  es[][o.e.t.ThreadPool] timer thread slept for [7.6m/456240ms] on absolute clock which is above the warn threshold of [5000ms]
+2023.04.10 23:10:42 WARN  es[][o.e.t.ThreadPool] execution of [org.elasticsearch.cluster.InternalClusterInfoService$RefreshScheduler$$Lambda$3130/0x0000000100a1ec40@480be0d0] took [5300ms] which is above the warn threshold of [5000ms]
+2023.04.10 23:10:42 WARN  es[][o.e.t.ThreadPool] timer thread slept for [5.3s/5300741667ns] on relative clock which is above the warn threshold of [5000ms]
+2023.04.10 23:10:56 WARN  es[][o.e.t.ThreadPool] absolute clock went backwards by [1s/1042ms] while timer thread was sleeping

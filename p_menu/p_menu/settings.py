@@ -180,9 +180,9 @@ USE_TZ = True
 #CDN
 
 CLOUDINARY_STORAGE = {
-    "CLOUD_NAME" : env_values['CLOUD_NAME'],
-    "API_KEY" : env_values['API_KEY'],
-    "API_SECRET" : env_values['API_SECRET'],
+    "CLOUD_NAME" : os.getenv('CLOUD_NAME'),
+    "API_KEY" : os.getenv('API_KEY'),
+    "API_SECRET" : os.getenv('API_SECRET'),
 }
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
