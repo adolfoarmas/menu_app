@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: menu-api
-        image: adolfoarmas90/menu_api:29
+        image: adolfoarmas90/menu_api:latest
         env: 
           - name: CLOUD_NAME
             valueFrom:
