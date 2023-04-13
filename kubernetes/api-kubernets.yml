@@ -14,22 +14,22 @@ spec:
     spec:
       containers:
       - name: menu-api
-        image: adolfoarmas90/menu_api:latest
+        image: adolfoarmas90/menu_api:30
         env: 
-          - name: CLOUD_NAME
-            valueFrom:
-              secretKeyRef:
-                name: api-secret
-                key: CLOUD_NAME
-          - name: API_KEY
-            valueFrom:
-              secretKeyRef:
-                name: api-secret
-                key: API_KEY
-          - name: API_SECRET
-            valueFrom:
-              secretKeyRef:
-                name: api-secret
-                key: API_SECRET
+        - name: CLOUD_NAME
+          valueFrom:
+            secretKeyRef:
+              name: api-secret
+              key: CLOUD_NAME
+        - name: API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: api-secret
+              key: API_KEY
+        - name: API_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: api-secret
+              key: API_SECRET
         ports:
         - containerPort: 8000

@@ -94,3 +94,6 @@
 2023.04.13 19:08:05 INFO  es[][o.e.n.Node] started
 2023.04.13 19:08:05 INFO  es[][o.e.g.GatewayService] recovered [7] indices into cluster_state
 2023.04.13 19:08:08 INFO  es[][o.e.c.r.a.AllocationService] Cluster health status changed from [RED] to [GREEN] (reason: [shards started [[metadatas][0]]]).
+2023.04.13 21:03:43 WARN  es[][o.e.t.ThreadPool] timer thread slept for [7.1s/7131ms] on absolute clock which is above the warn threshold of [5000ms]
+2023.04.13 21:03:43 WARN  es[][o.e.t.ThreadPool] timer thread slept for [7.1s/7130831532ns] on relative clock which is above the warn threshold of [5000ms]
+2023.04.13 21:03:43 WARN  es[][o.e.t.ThreadPool] timer thread slept for [27.4m/1648657ms] on absolute clock which is above the warn threshold of [5000ms]
