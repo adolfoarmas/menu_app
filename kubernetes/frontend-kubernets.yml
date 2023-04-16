@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: menu-frontend
-        image: adolfoarmas90/menu_frontend:31
+        image: adolfoarmas90/menu_frontend:32
         env:
           - name: REACT_APP_API_URL
             value: http://api:8000
