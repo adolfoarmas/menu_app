@@ -13,10 +13,3 @@ spec:
             name: frontend
             port:
               number: 80
-      - path: /login
-        pathType: Prefix
-        backend:
-          service:
-            name: frontend
-            port:
-              number: 80
