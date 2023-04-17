@@ -5,7 +5,6 @@ metadata:
   labels:
     app: api
 spec:
-  type: ClusterIP
   selector:
     role: api
   ports:
@@ -29,7 +28,7 @@ spec:
   - name: postgres
     port: 5432
     targetPort: 5432
-    
+
 ---
 
 apiVersion: v1
