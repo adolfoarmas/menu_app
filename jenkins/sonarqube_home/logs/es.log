@@ -1,2 +1,1 @@
-2023.04.16 15:31:30 WARN  es[][o.e.t.ThreadPool] timer thread slept for [1.6d/142535593ms] on absolute clock which is above the warn threshold of [5000ms]
-2023.04.16 15:32:27 INFO  es[][o.e.c.r.a.DiskThresholdMonitor] high disk watermark [90%] no longer exceeded on [YC9DAJ3BQ1iOFNEHjit3uA][sonarqube][/opt/sonarqube/data/es7/nodes/0] free: 3.8gb[10%], but low disk watermark [85%] is still exceeded
+2023.04.17 13:23:59 WARN  es[][o.e.t.ThreadPool] timer thread slept for [20.3h/73359345ms] on absolute clock which is above the warn threshold of [5000ms]
