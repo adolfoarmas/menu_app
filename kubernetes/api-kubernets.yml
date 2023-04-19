@@ -37,7 +37,7 @@ spec:
             claimName: django-app-pvc
       containers:
         - name: django
-          image: adolfoarmas90/menu_api:72
+          image: adolfoarmas90/menu_api:73
           env: 
           - name: CLOUD_NAME
             valueFrom:
@@ -60,8 +60,7 @@ spec:
                 mountPath: /vol/web
 
         - name: proxy
-          image: adolfoarmas90/proxy:53
-          imagePullPolicy: Never
+          image: adolfoarmas90/proxy:73
           ports:
             - containerPort: 8000
               name: proxy
