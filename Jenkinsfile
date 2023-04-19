@@ -54,8 +54,8 @@ pipeline {
           sh "docker push ${REGISTRY}/menu_frontend:${BUILD_NUMBER}"
           sh "docker tag postgres:latest ${REGISTRY}/postgres:${BUILD_NUMBER}"
           sh "docker push ${REGISTRY}/postgres:${BUILD_NUMBER}"
-          sh "docker tag nginx:latest ${REGISTRY}/nginx:${BUILD_NUMBER}"
-          sh "docker push ${REGISTRY}/nginx:${BUILD_NUMBER}"
+          sh "docker tag proxy:latest ${REGISTRY}/proxy:${BUILD_NUMBER}"
+          sh "docker push ${REGISTRY}/proxy:${BUILD_NUMBER}"
           // echo 'skip pushing images to docker hub...'
         }
       }

@@ -4,14 +4,14 @@ services:
   api:
     build: ./p_menu
     image: menu_api:latest
-    command: bash -c "python /code/manage.py runserver 0.0.0.0:8000"
     volumes:
-      - ./p_menu:/code
+      - static-data:/vol/web
     ports:
       - "8000:8000"
     container_name: menu_api
     depends_on:
-      - db
+      db:
+        condition: service_healthy
   
   frontend:
     build: ./frontend/menu/
@@ -29,21 +29,27 @@ services:
   db:
     image: postgres:latest
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres-data:/var/lib/postgresql/data/
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
     ports:
       - "5432:5432"
     container_name: menu_db
-    
-  nginx:
-    image: nginx:latest
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    container_name: menu_nginx
+
+  proxy:
+    build:
+      context: ./p_menu/proxy
+    restart: always
     depends_on:
-      - frontend
+      - api
+    ports:
+      - 8080:8000
+    volumes:
+      - static-data:/vol/web
+    environment:
+      - LISTEN_PORT=8000
+      - APP_HOST=api
+      - APP_PORT=8080
 volumes:
-  postgres_data:
+  postgres-data:
+  static-data:

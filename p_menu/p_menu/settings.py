@@ -185,11 +185,12 @@ CLOUDINARY_STORAGE = {
     "API_SECRET" : os.environ.get('API_SECRET'),
 }
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = '/vol/web/static'
+STATIC_URL = '/static/static/'
 
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+MEDIA_ROOT = '/vol/web/media'
+MEDIA_URL = '/static/media/'
+
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # MEDIA_ROOT = BASE_DIR + MEDIA_URL

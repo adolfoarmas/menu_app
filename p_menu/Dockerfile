@@ -1,8 +1,14 @@
-FROM python:3.9
+FROM python:alpine3.17
+
+ENV PYTHONUNBUFFERED 1
+
 
 WORKDIR /code
 
 COPY requirements.txt /code/
+
+RUN apk add --update --no-cache postgresql-client build-base postgresql-dev \
+                                musl-dev zlib zlib-dev linux-headers
 
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
@@ -10,4 +16,6 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY . /code/
 
-CMD ["gunicorn", "p_menu.wsgi:application", "--bind", "0.0.0.0:8000"]
+RUN chmod -R +x ./scripts
+
+CMD ["/scripts/run.sh"]
