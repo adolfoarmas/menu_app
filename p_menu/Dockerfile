@@ -13,9 +13,10 @@ RUN python -m venv /py && \
 
 # RUN python manage.py makemigrations && python manage.py migrate 
 
-COPY . /code/
-WORKDIR /code
+COPY . .
 
-RUN chmod -R +x ./scripts
+WORKDIR .
+
+RUN chmod -R +x /scripts
 
 CMD ["/scripts/run.sh"]
