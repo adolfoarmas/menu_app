@@ -37,7 +37,7 @@ spec:
             claimName: django-app-pvc
       containers:
         - name: django
-          image: adolfoarmas90/menu_api:53
+          image: adolfoarmas90/menu_api:72
           env: 
           - name: CLOUD_NAME
             valueFrom:
