@@ -44,6 +44,7 @@ services:
       - api
     ports:
       - 8080:8000
+    container_name: proxy
     volumes:
       - static-data:/vol/web
     environment:
