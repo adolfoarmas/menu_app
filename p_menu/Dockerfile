@@ -19,4 +19,4 @@ WORKDIR .
 
 RUN chmod -R +x /scripts
 
-CMD ["scripts/run.sh"]
+CMD ["source", "scripts/run.sh"]
