@@ -17,6 +17,8 @@ COPY . .
 
 WORKDIR .
 
+ENV PATH="/scripts:/py/bin:$PATH"
+
 RUN chmod -R +x /scripts
 
-CMD ["source", "scripts/run.sh"]
+CMD ["scripts/run.sh"]
