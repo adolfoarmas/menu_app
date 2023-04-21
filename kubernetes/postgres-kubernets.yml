@@ -37,7 +37,7 @@ spec:
           persistentVolumeClaim:
             claimName: django-db-pvc
       containers:
-      - image: postgres:alpine
+      - image: postgres:15.2
         name: db
         ports:
         - containerPort: 5432

@@ -27,7 +27,7 @@ spec:
   selector:
     role: db
   ports:
-  - name: postgres
+  - name: db
     port: 5432
     targetPort: 5432
 
