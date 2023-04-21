@@ -13,11 +13,13 @@ RUN python -m venv /py && \
 
 # RUN python manage.py makemigrations && python manage.py migrate 
 
+COPY ./scripts /scripts
 RUN chmod -R +x /scripts
+
 ENV PATH="/scripts:/py/bin:$PATH"
 
-COPY . .
 
+COPY . .
 WORKDIR .
 
 EXPOSE 80
