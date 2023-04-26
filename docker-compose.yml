@@ -3,11 +3,11 @@ services:
 
   api:
     build: ./p_menu
-    command: bash -c "python /code/manage.py runserver 0.0.0.0:8000"
+    command: "sh -c gunicorn p_menu.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - ./p_menu:/code
     ports:
-      - "8000:8000"
+      - "8000:80"
     depends_on:
       - db
   
