@@ -97,7 +97,8 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = (
     "http://localhost:3000",
-    "http://localhost:8000"
+    "http://localhost:8000",
+    "http://34.176.59.69",
 )
 
 
@@ -202,7 +203,6 @@ AUTH_USER_MODEL = 'a_users.UserProfile'
 
 CORS_ALLOW_ALL_ORIGINS = False
 
-CORS_ALLOWED_ORIGINS = ["http://34.176.59.69",]
 
 
 CORS_ORIGIN_WHITELIST = (
