@@ -1,4 +1,4 @@
-FROM python:alpine3.17
+FROM python:3.10-alpine
 
 ENV PYTHONUNBUFFERED 1
 
@@ -11,7 +11,18 @@ RUN python3 -m venv /py && \
     /py/bin/pip install --upgrade pip && \
     /py/bin/pip install -r /requirements.txt
 
+
 COPY . .
+
+# RUN /py/bin/pip show django && \
+#     python3 --version
+
+# RUN echo $PYTHONPATH
+
 WORKDIR /
 
-CMD ["sh", "-c", "source /py/bin/activate && gunicorn p_menu.wsgi:application --bind 0.0.0.0:8000"]
+COPY ./entrypoint.sh /
+
+ENTRYPOINT [ "sh", "entrypoint.sh" ]
+
+# CMD ["sh", "-c", "source /py/bin/activate && gunicorn p_menu.wsgi:application --bind 0.0.0.0:8000"]
