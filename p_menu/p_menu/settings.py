@@ -200,11 +200,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #Custom auth user register
 AUTH_USER_MODEL = 'a_users.UserProfile'
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ORIGIN_WHITELIST = (
-    'localhost:3000',
-    'localhost:8000',
+    'frontend:3000',
 )
 
 CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:3000"] 
