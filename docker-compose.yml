@@ -40,5 +40,6 @@ services:
         target: /etc/nginx/nginx.conf
     depends_on:
       - api
+      - frontend
 volumes:
   postgres_data:
