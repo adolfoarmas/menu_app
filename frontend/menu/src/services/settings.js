@@ -1,3 +1,4 @@
+console.log(process.env.REACT_APP_API_URL)
 export const DISHES_END_POINT = `${process.env.REACT_APP_API_URL}/api/dishes/`
 
 export const DISH_CATEGORIES_END_POINT = `${process.env.REACT_APP_API_URL}/api/dishCategory/`

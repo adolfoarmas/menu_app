@@ -7,7 +7,7 @@ COPY package.json /frontend/menu
 
 COPY . .
 
-RUN apt-get update && apt-get install -y curl
+RUN apk update && apt add curl
 
 RUN npm install
 
