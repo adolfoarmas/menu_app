@@ -11,6 +11,8 @@ RUN npm cache clean --force
 
 RUN apk update && apt add curl
 
+RUN apk update && apt add curl
+
 RUN npm install
 
 COPY . .

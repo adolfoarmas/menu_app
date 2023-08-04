@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-w_dqlg1yi1l@a-q@=y!bd)b%p=b630vuzq=r%wk4v@+pw+9rdz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'api:8000']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
@@ -97,7 +97,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = (
     "http://localhost:3000",
-    "http://localhost:8000"
+    "http://localhost:8000",
 )
 
 
@@ -200,11 +200,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #Custom auth user register
 AUTH_USER_MODEL = 'a_users.UserProfile'
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False
+
+
 
 CORS_ORIGIN_WHITELIST = (
-    'localhost:3000',
-    'localhost:8000',
+    'frontend:3000',
 )
 
 CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:3000"] 
