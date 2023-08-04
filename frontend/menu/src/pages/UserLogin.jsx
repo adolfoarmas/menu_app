@@ -14,8 +14,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser, faLockOpen } from "@fortawesome/free-solid-svg-icons";
 import ToastMessage from "../components/ToastMessage.jsx";
+import { useTranslation } from 'react-i18next';
+
 
 const UserLogin = () => {
+  const { t } = useTranslation();
+  
   const [username, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
   const [userData, setUserData] = useState([]);
@@ -99,10 +103,10 @@ const UserLogin = () => {
         <ToastMessage message={toastMessage} type={toastType} duration={3000} />
       )}
       <FontAwesomeIcon icon={faCircleUser} />
-      <h2>User Login</h2>
+      <h2>{t('userLogin')}</h2>
       <FormLogin className="login-form-form" onSubmit={(e) => handleSubmit(e)}>
         <FormFieldNameLabel>
-          <p>Username</p>
+          <p>{t('userName')}</p>
           <input
             type="text"
             required
@@ -110,7 +114,7 @@ const UserLogin = () => {
           />
         </FormFieldNameLabel>
         <FormFieldNameLabel>
-          <p>Password</p>
+          <p>{t('password')}</p>
           <input
             type="password"
             required
@@ -119,9 +123,9 @@ const UserLogin = () => {
         </FormFieldNameLabel>
         {/* <p> { errorText }</p> */}
         <LoginButtonGroupDiv>
-          <ButtonLogin type="submit">Login</ButtonLogin>
+          <ButtonLogin type="submit">{t('login')}</ButtonLogin>
           <a href="/">
-            <FontAwesomeIcon icon={faLockOpen} /> Go to see the menu
+            <FontAwesomeIcon icon={faLockOpen} /> {t('goToSeeTheMenu')}
           </a>
         </LoginButtonGroupDiv>
       </FormLogin>

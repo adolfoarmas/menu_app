@@ -12,7 +12,6 @@ const App = () =>
 return (
   <AppWrapper>
     <UserContextProvider>
-    
         <Router>
             <Routes>
                 <Route path="/" element={

@@ -1,0 +1,9 @@
+{
+    "userLogin": "Inicio de Sesión de Usuario",
+    "userName": "Nombre de Usuario",
+    "password": "Contraseña",
+    "goToSeeTheMenu": "Ir a ver el menú",
+    "login": "Iniciar Sesión",
+    "loading": "Cargando...",
+    "displayToastMessage": "Plato {nameDeleted} ha sido eliminada"
+}

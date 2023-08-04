@@ -9,8 +9,11 @@ import ConfirmationYesNo from "./popups/ConfirmationYesNo";
 import {DishWrapper, DishImage, DishDescriptionWrapper, DishPriceCurrencyWrapper, DishEditButton, DishDeleteButton, DishImageDiv} from "../styles/css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
+import { interpolate } from '../utils/utils'
 
 const DishItem = (props) => {
+  const { t } = useTranslation();
 
   const { key, csfrToken } = useContext(Context);
   const [toastVisible, setToastVisible, toastMessage, setToastMessage, toastType, setToastType] = useContext(ToastVisibilityContext)
@@ -49,13 +52,15 @@ const DishItem = (props) => {
       return data
     })
     .then(() => {
-      const nameDeleted = dish.name
+      const nameDeleted = {nameDeleted : dish.name}
+      const DisplayToastMessageTemplate = t('displayToastMessage')
+      const displayToastMessage = interpolate(DisplayToastMessageTemplate, nameDeleted)
       const categorySelected = dishCategories.find(obj => obj.id === dish.category)
       const dishesOfCategorySelected = categorySelected['dishes']
       const indexToEdit = dishesOfCategorySelected.indexOf(dish)
       categorySelected['dishes'].splice(indexToEdit, 1) //modifies existing array
       setDish(null)
-      displayToast('Category "' + String(nameDeleted) + '" has been deleted!', 'success')
+      displayToast(displayToastMessage, 'success')
       onDeleteDish()
 
     })

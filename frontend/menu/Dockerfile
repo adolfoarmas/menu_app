@@ -5,9 +5,15 @@ WORKDIR /frontend/menu
 
 COPY package.json /frontend/menu
 
-COPY . .
+COPY package-lock.json /frontend/menu
+
+RUN npm cache clean --force
 
 RUN npm install
+
+COPY . .
+
+RUN npm run build
 
 EXPOSE 3000
 

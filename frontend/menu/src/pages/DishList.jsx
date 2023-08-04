@@ -4,8 +4,13 @@ import CategoryItem from "../components/CategoryItem";
 import { CategoriesContext, ToastVisibilityContext } from "../context/userContext";
 import ToastMessage from "../components/ToastMessage";
 import { DishListContentWrapper } from "../styles/css";
+import { useTranslation } from 'react-i18next';
+
 
 const DishList = () => {
+
+  const { t } = useTranslation();
+
   const [dishCategories, setDishCategories] = useContext(CategoriesContext);
   const [toastVisible, setToastVisible, toastMessage, setToastMessage, toastType, setToastType] = useContext(ToastVisibilityContext)
 
@@ -23,7 +28,7 @@ const DishList = () => {
         />
       )}
     </div>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>{t('loading')}</div>}>
         <CategoiesDiv>
           {dishCategories?.map((category, index) => (
             <>

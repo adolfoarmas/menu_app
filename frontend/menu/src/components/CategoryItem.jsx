@@ -11,7 +11,6 @@ import { ButtonDeleteCategory, ButtonEditCategory, CategoryButton, CategoryWrapp
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
-
 const CategoryItem = ({ data }) => {
   const { key, csfrToken } = useContext(Context);
   const [dishCategories, setDishCategories] = useContext(CategoriesContext);

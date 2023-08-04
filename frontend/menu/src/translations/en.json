@@ -1,0 +1,9 @@
+{
+  "userLogin": "User Login",
+  "userName": "User Name",
+  "password": "Password",
+  "goToSeeTheMenu": "Go to see the menu",
+  "login": "Login",
+  "loading": "Loading...",
+  "displayToastMessage": "Dish {nameDeleted} has been deleted!"
+}

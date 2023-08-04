@@ -2,9 +2,25 @@ import styled from 'styled-components';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import { I18nextProvider } from 'react-i18next';
+import i18next from 'i18next';
 import reportWebVitals from './reportWebVitals';
 import { IndexWrapper } from './styles/css';
+import App from './App';
+
+i18next.init({
+  interpolation: { escapeValue: false },
+  lng: 'es',
+  resources: {
+    en: {
+      translation: require('./translations/en.json')
+    },
+
+    es: {
+      translation: require('./translations/es.json')
+    },
+  },
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -12,7 +28,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <IndexWrapper>
-      <App/>
+      <I18nextProvider i18n={i18next}>
+        <App />
+      </I18nextProvider>
     </IndexWrapper>
   </React.StrictMode>
 );
