@@ -11,7 +11,6 @@ RUN python3 -m venv /py && \
     /py/bin/pip install --upgrade pip && \
     /py/bin/pip install -r /requirements.txt
 
-
 COPY . .
 
 # RUN /py/bin/pip show django && \

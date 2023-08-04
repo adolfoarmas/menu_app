@@ -30,16 +30,16 @@ services:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
     ports:
       - "5432:5432"
-  nginx:
-    image: nginx:latest
-    ports:
-      - "80:80"
-    volumes:
-      - type: bind
-        source: nginx.conf
-        target: /etc/nginx/nginx.conf
-    depends_on:
-      - api
-      - frontend
+  # nginx:
+  #   image: nginx:latest
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - type: bind
+  #       source: nginx.conf
+  #       target: /etc/nginx/nginx.conf
+  #   depends_on:
+  #     - api
+  #     - frontend
 volumes:
   postgres_data:
