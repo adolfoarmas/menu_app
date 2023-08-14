@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import React, { useState, useContext } from "react";
-
-import { Context } from "../../context/userContext";
+import React from "react";
+import { useTranslation } from 'react-i18next';
 import { useEffect } from "react";
 import { ButtonNormal, ButtonWarn } from "../../styles/css";
 
 const ConfirmationYesNo = ({message, onConfirmation}) => {
-    //const { token, csfrToken, userLoggedId } = useContext(Context);
+  const { t } = useTranslation();
+  //const { token, csfrToken, userLoggedId } = useContext(Context);
 
   useEffect(() => {
     
@@ -23,9 +23,9 @@ const ConfirmationYesNo = ({message, onConfirmation}) => {
             <p>{message}</p>
         </div>
         <ButtonDiv>
-            <ButtonWarn onClick={(e) => handleConfirmation(e, true)} type="submit">Yes</ButtonWarn>
+            <ButtonWarn onClick={(e) => handleConfirmation(e, true)} type="submit">{ t('yes') }</ButtonWarn>
        
-            <ButtonNormal onClick={(e) => handleConfirmation(e, false)} type="reset">No</ButtonNormal>
+            <ButtonNormal onClick={(e) => handleConfirmation(e, false)} type="reset">{ t('no') }</ButtonNormal>
         </ButtonDiv>
     </FormDiv>
   );

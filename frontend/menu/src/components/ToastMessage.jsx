@@ -1,5 +1,4 @@
 import React, { useEffect, useContext } from "react";
-import styled from "styled-components";
 import { ToastVisibilityContext } from "../context/userContext";
 import { Toast } from "../styles/css";
 
@@ -8,9 +7,9 @@ const ToastMessage = ({ message, type, duration }) => {
   const [
     toastVisible,
     setToastVisible,
-    toastMessage,
+    ,
     setToastMessage,
-    toastType,
+    ,
     setToastType,
   ] = useContext(ToastVisibilityContext);
 

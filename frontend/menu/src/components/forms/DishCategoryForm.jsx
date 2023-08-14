@@ -1,9 +1,10 @@
 import React, { useState, } from "react";
 import { useEffect } from "react";
 import { FormDishCategoryDiv, FormDishCategory, ButtonCreateEdit, FormFieldNameLabel} from "../../styles/css";
-
+import { useTranslation } from 'react-i18next';
 
 const DishCategoryForm = ({data={}, onSubmit}) => {
+  const { t } = useTranslation();
 
   const [formData, setFormData] = useState(data);
   const [dishCategoryName, setDishCategoryName] = useState("");
@@ -41,12 +42,12 @@ const DishCategoryForm = ({data={}, onSubmit}) => {
     <FormDishCategoryDiv >
       <FormDishCategory onSubmit={handleSubmit}>
         {data.name ? (
-          <h2>Edit Dish Category</h2>
+          <h2>{ t('editCategory') }</h2>
         ) : (
-          <h2>Add New Dish Category</h2>
+          <h2>{ t('addCategory') }</h2>
         )}
         <FormFieldNameLabel>
-          <p>Name:</p>
+          <p>{ t('name') }</p>
           <input
             type="text"
             id="name"
@@ -58,7 +59,7 @@ const DishCategoryForm = ({data={}, onSubmit}) => {
           />
         </FormFieldNameLabel>
         <FormFieldNameLabel>
-          <p>Description:</p>
+          <p>{ t('description') }</p>
           <textarea
             id="description"
             name="description"
@@ -68,7 +69,7 @@ const DishCategoryForm = ({data={}, onSubmit}) => {
             onChange={handleChange}
           />
         </FormFieldNameLabel>
-        <ButtonCreateEdit disabled={data===formData} type="submit">{data.name? 'Edit' : 'Create'}</ButtonCreateEdit>
+        <ButtonCreateEdit disabled={data===formData} type="submit">{data.name? t('update') : t('create')}</ButtonCreateEdit>
       </FormDishCategory>
     </FormDishCategoryDiv>
   );

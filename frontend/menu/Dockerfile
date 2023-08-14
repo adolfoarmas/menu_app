@@ -9,9 +9,7 @@ COPY package-lock.json /frontend/menu
 
 RUN npm cache clean --force
 
-RUN apk update && apt add curl
-
-RUN apk update && apt add curl
+RUN apk update && apk add curl
 
 RUN npm install
 

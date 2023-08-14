@@ -10,37 +10,38 @@ import ConfirmationYesNo from "./popups/ConfirmationYesNo";
 import { ButtonDeleteCategory, ButtonEditCategory, CategoryButton, CategoryWrapper, DishListWrapper, } from "../styles/css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan, faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
+import { interpolate } from '../utils/utils'
 
 const CategoryItem = ({ data }) => {
+  const { t } = useTranslation();
   const { key, csfrToken } = useContext(Context);
   const [dishCategories, setDishCategories] = useContext(CategoriesContext);
   const [dishes, setDishes] = useState([]);
-  const [toastVisible, setToastVisible, toastMessage, setToastMessage, toastType, setToastType] = useContext(ToastVisibilityContext)
-
+  const [ , setToastVisible, , setToastMessage, , setToastType] = useContext(ToastVisibilityContext)
   const [userLoggedKey] = key;
   const [csfrTokenValue] = csfrToken;
-
   const [dishesVisible, setDishesVisible] = useState(false);
   // const [dishes, setDishes] = useState([]);
   const [category, setCategory] = useState(data)
   const [confirmationModalMessage, setConfirmationMessage] = useState('')
-
-  const editDishCategoryModal = useModal("Dish Category");
-  const confirmationModal = useModal("Confirm delete category");
+  const editDishCategoryModal = useModal(t('category'));
+  const confirmationModal = useModal(t('confirmToDeletePopUpTitle'));
 
   const onEditDishCategoryModal = () => {
     editDishCategoryModal.changeShow();
   };
   
   const onDeleteDishCategory = () => {
-    setConfirmationMessage('Are you sure you want to delete the category?')
+    const toDelete = { "toDelete": category.name }
+    const sureDeleteConfirmationMessage = interpolate(t('sureDeleteConfirmationTemplate'), toDelete)
+    setConfirmationMessage(sureDeleteConfirmationMessage)
     confirmationModal.changeShow();
   } 
 
   const onConfirmation = (confirmation) => {
     confirmation ? onConfirmateDeleteDishCategory() : onDeleteDishCategory();
   }
-
 
   const onConfirmateDeleteDishCategory = () => {
     deleteDishCategory(category.id, userLoggedKey, csfrTokenValue)
@@ -52,11 +53,13 @@ const CategoryItem = ({ data }) => {
       return data
     })
     .then(() => {
-      const nameDeleted = category.name
+      const nameDeleted = {nameDeleted : category.name}
+      const deletedToastMessageTemplate = t('deletedToastMessageTemplate')
+      const displayToastMessage = interpolate(deletedToastMessageTemplate, nameDeleted)
       const indexToEdit = dishCategories.indexOf(category)
       dishCategories.splice(indexToEdit, 1) //modifies existing array
       setDishCategories(dishCategories)
-      displayToast('Category "' + String(nameDeleted) + '" has been deleted!', 'success')
+      displayToast(displayToastMessage, 'success')
       confirmationModal.changeShow();
     })
     .catch(data => {
@@ -82,6 +85,7 @@ const CategoryItem = ({ data }) => {
   //TO REFACTOR: Unify with onSubmitNewDishCategory in DishList.jsx page
   const onSubmit = (formData) => {
     let payload = new FormData();
+    
     payload.append("name", formData.name);
     payload.append("description", formData.description);
     payload.append("created_by", JSON.parse(window.localStorage.getItem("logedUserId"))
@@ -96,13 +100,15 @@ const CategoryItem = ({ data }) => {
       return data
     })
     .then((data) => {
-      const editedCategory = data;
-      setCategory(editedCategory)
+      const nameEdited = {nameEdited : category.name}
+      const editedToastMessageTemplate = t('editedToastMessageTemplate')
+      const displayToastMessage = interpolate(editedToastMessageTemplate, nameEdited)
+      setCategory(category)
       const indexToEdit = dishCategories.indexOf(category)
-      dishCategories.splice(indexToEdit, 1, editedCategory) //modifies existing array
+      dishCategories.splice(indexToEdit, 1, category) //modifies existing array
       setDishCategories(dishCategories)
       onEditDishCategoryModal()
-      displayToast('Category "' + String(data.name) + '" has been edited!', 'success')
+      displayToast(displayToastMessage, 'success')
     })
     .catch(data => {
       displayToast(data, 'error')

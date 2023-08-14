@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import React, { useEffect, useContext } from "react";
 import DishForm from "./forms/DishForm";
 import DishCategoryForm from "./forms/DishCategoryForm";
@@ -10,17 +9,21 @@ import {
 import ModalHook, { useModal } from "../hooks/modalHook";
 import createDishCategory from "../services/dishCategory/createDishCategory";
 import createDish from "../services/dish/createDish";
-import {ButtonNormal, ToolBarButton, ToolBarWrapper, } from "../styles/css"
+import {ButtonNormal, ToolBarWrapper, } from "../styles/css"
+import { useTranslation } from 'react-i18next';
+import { interpolate } from '../utils/utils'
 
 const ToolBar = () => {
+  const { t } = useTranslation();
+
   const { key, csfrToken } = useContext(Context);
   const [dishCategories, setDishCategories] = useContext(CategoriesContext);
-  const [toastVisible, setToastVisible, toastMessage, setToastMessage, toastType, setToastType,] = useContext(ToastVisibilityContext);
+  const [, setToastVisible, , setToastMessage, , setToastType,] = useContext(ToastVisibilityContext);
   const [userLoggedKey] = key;
   const [csfrTokenValue] = csfrToken;
 
-  const newDishHook = useModal("Dish");
-  const newDishCategoryHook = useModal("Dish Category");
+  const newDishHook = useModal(t("dish"));
+  const newDishCategoryHook = useModal(t("category"));
 
   const newDishModal = () => {
     newDishHook.changeShow();
@@ -73,8 +76,13 @@ const ToolBar = () => {
         );
         setDishCategories(updatedCategories);
         newDishModal();
+        
+        const nameCreated = {nameCreated: data.name}
+        const createdToastMessageTemplate = t('createdToastMessageTemplate')
+        const displayToastMessage = interpolate(createdToastMessageTemplate, nameCreated)
+
         displayToast(
-          'Dish "' + String(data.name) + '" has been created!',
+          displayToastMessage,
           "success"
         );
       })
@@ -94,19 +102,23 @@ const ToolBar = () => {
     );
     createDishCategory(payload, userLoggedKey, csfrTokenValue)
       .then((data) => {
-        // console.log(data)
+
         if (data.Error) {
           throw data;
         }
         return data;
       })
       .then((data) => {
-        // console.log(data)
+
+        const nameCreated = {nameCreated: data.name}
+        const createdToastMessageTemplate = t('createdToastMessageTemplate')
+        const displayToastMessage = interpolate(createdToastMessageTemplate, nameCreated)
+
         const newCategory = [data];
         setDishCategories([...dishCategories, ...newCategory]);
         newDishCategoryModal();
         displayToast(
-          'Category "' + String(data.name) + '" has been created!',
+          displayToastMessage,
           "success"
         );
       })
@@ -133,10 +145,10 @@ const ToolBar = () => {
             content={<DishCategoryForm onSubmit={onSubmitNewDishCategory} />}
         />
         <ButtonNormal onClick={newDishModal}>
-            + Add Dish
+            { t('addDish') }
         </ButtonNormal>
         <ButtonNormal onClick={newDishCategoryModal}>
-            + New Dish Category
+        { t('addCategory') }
         </ButtonNormal>
         </ToolBarWrapper>) : (<></>)}
     </>

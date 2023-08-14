@@ -1,8 +1,7 @@
-import styled from "styled-components";
 import React, { useEffect, useState, useContext } from "react";
 import ModalHook, { useModal } from "../hooks/modalHook";
 import DishForm from "./forms/DishForm";
-import { CategoriesContext, Context, DishesContext, ToastVisibilityContext } from "../context/userContext";
+import { CategoriesContext, Context, ToastVisibilityContext } from "../context/userContext";
 import editDish from "../services/dish/editDish";
 import deleteDish from "../services/dish/deleteDish.js";
 import ConfirmationYesNo from "./popups/ConfirmationYesNo";
@@ -14,38 +13,36 @@ import { interpolate } from '../utils/utils'
 
 const DishItem = (props) => {
   const { t } = useTranslation();
-
   const { key, csfrToken } = useContext(Context);
-  const [toastVisible, setToastVisible, toastMessage, setToastMessage, toastType, setToastType] = useContext(ToastVisibilityContext)
-  const [dishCategories, setDishCategories] = useContext(CategoriesContext)
-
-  const [dishes, setDishes] = useContext(DishesContext);
-
+  const [ , setToastVisible, , setToastMessage, , setToastType] = useContext(ToastVisibilityContext)
+  const [dishCategories, ] = useContext(CategoriesContext)
+  // const [dishes, setDishes] = useContext(DishesContext);
   const [userLoggedKey] = key;
   const [csfrTokenValue] = csfrToken;
-
   let [dish, setDish] = useState({});
   const [confirmationModalMessage, setConfirmationMessage] = useState('')
-
-  const editDishHook = useModal("Dish");
-  const confirmationModal = useModal("Confirm delete dish");
-
-  const onConfirmation = (confirmation) => {
-    confirmation ? onConfirmateDeleteDish() : onDeleteDish();
-  }
-  
-  const onDeleteDish = () => {
-    confirmationModal.changeShow();
-  } 
+  const editDishHook = useModal(t('dish'));
+  const confirmationModal = useModal(t('confirmToDeletePopUpTitle'));
 
   const editDishModal = () => {
     editDishHook.changeShow();
   };
+ 
+  const onDeleteDish = () => {
+    const toDelete = {"toDelete" : dish.name}
+    const sureDeleteConfirmationTemplate = t('sureDeleteConfirmationTemplate')
+    const sureDeleteConfirmationMessage = interpolate(sureDeleteConfirmationTemplate, toDelete)
+    setConfirmationMessage(sureDeleteConfirmationMessage)
+    confirmationModal.changeShow();
+  } 
+  
+  const onConfirmation = (confirmation) => {
+    confirmation ? onConfirmateDeleteDish() : onDeleteDish();
+  }
 
   const onConfirmateDeleteDish = () => {
     deleteDish(dish.id, userLoggedKey, csfrTokenValue)
     .then(data => {
-      // console.log(data)
       if(data.Error){
         throw data
       }
@@ -53,8 +50,8 @@ const DishItem = (props) => {
     })
     .then(() => {
       const nameDeleted = {nameDeleted : dish.name}
-      const DisplayToastMessageTemplate = t('displayToastMessage')
-      const displayToastMessage = interpolate(DisplayToastMessageTemplate, nameDeleted)
+      const deletedToastMessageTemplate = t('deletedToastMessageTemplate')
+      const displayToastMessage = interpolate(deletedToastMessageTemplate, nameDeleted)
       const categorySelected = dishCategories.find(obj => obj.id === dish.category)
       const dishesOfCategorySelected = categorySelected['dishes']
       const indexToEdit = dishesOfCategorySelected.indexOf(dish)
@@ -77,7 +74,7 @@ const DishItem = (props) => {
 
   useEffect(() => {
     setDish(props.dish);
-    setConfirmationMessage('Are you sure you want to delete the category?')
+    
   }, []);
 
   //TO REFACTOR: Unify with onSubmit DishForm in DishList.jsx page
@@ -88,9 +85,11 @@ const DishItem = (props) => {
     payload.append("description", formData.description);
     payload.append("category", JSON.parse(formData.category));
     payload.append("observation", formData.observation);
+
     if (typeof formData.image != "string") {
       payload.append("image", formData.image);
     }
+
     payload.append("price", formData.price);
     payload.append("currency", formData.currency);
     payload.append(
@@ -106,9 +105,12 @@ const DishItem = (props) => {
       return data
     })
     .then((data) => {
+      const nameEdited = {nameEdited : data.name}
+      const editedToastMessageTemplate = t('editedToastMessageTemplate')
+      const displayToastMessage = interpolate(editedToastMessageTemplate, nameEdited)
       setDish(data);
       editDishModal()
-      displayToast('Dish "' + String(data.name) + '" has been edited!', 'success')
+      displayToast(displayToastMessage, 'success')
     })
     .catch(data => {
       displayToast(data, 'error')
@@ -121,7 +123,7 @@ const DishItem = (props) => {
         <DishWrapper>
         <ModalHook
           modalHook={editDishHook}
-          content={<DishForm data={dish} onSubmit={onSubmit} />}
+          content={<DishForm data={dish} onSubmit={ onSubmit } />}
         />
         <ModalHook
           modalHook={confirmationModal}

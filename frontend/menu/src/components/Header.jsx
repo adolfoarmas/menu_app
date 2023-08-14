@@ -12,16 +12,19 @@ import BussinessInformationCard from "./BussinessInformationCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import UserInformation from "./userInformation";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+import { interpolate } from '../utils/utils'
 
 const Header = () => {
+  const { t } = useTranslation();
   const [logOut, setLogOut] = useState(false);
-  const { key, csfrToken, userLoggedId, userLoggedName } =
+  const { key, csfrToken, userLoggedName } =
     useContext(Context);
   const navigate = useNavigate();
   const [userLoggedNameValue, setUserLoggedNameValue] = userLoggedName;
   const [userLoggedKey, setUserLoggedkey] = key;
-  const [csfrTokenValue, setCsfrTokenValue] = csfrToken;
+  const [ , setCsfrTokenValue] = csfrToken;
 
   function handleLogout(e) {
     e.preventDefault();
@@ -56,7 +59,7 @@ const Header = () => {
             <></>
           )}
           <ButtonNormal hidden={!userLoggedKey} onClick={handleLogout}>
-            <FontAwesomeIcon icon={faRightFromBracket} /><p>Log out</p>
+            <FontAwesomeIcon icon={faRightFromBracket} /><p>{ t('logOut') }</p>
           </ButtonNormal>
         </ButtonPanelDiv>
       </HeadderWrapper>

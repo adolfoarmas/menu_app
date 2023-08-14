@@ -15,9 +15,11 @@ import {
 } from "../../styles/css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp, faCamera } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from 'react-i18next';
 
 const DishForm = ({ data = {}, onSubmit }) => {
-  
+  const { t } = useTranslation();
+
   const [dishCategories] = useContext(CategoriesContext);
   
   const [formData, setFormData] = useState(data);
@@ -73,12 +75,12 @@ const DishForm = ({ data = {}, onSubmit }) => {
 
   return (
     <FormDish onSubmit={handleSubmit}>
-      {data.name ? <h2>Edit Dish</h2> : <h2>Add New Dish</h2>}
+      {data.name ? <h2>{ t('editDish') }</h2> : <h2>{ t('addDish') }</h2>}
       <FormDishDiv>
         {/* text inputs */}
         <InputsDiv>
           <FormFieldNameLabel>
-            <p>Name:</p>
+            <p>{ t('name') }</p>
           </FormFieldNameLabel>
           <input
             type="text"
@@ -90,12 +92,12 @@ const DishForm = ({ data = {}, onSubmit }) => {
             autoFocus
           />
           {!formData.name ? (
-            <FromErrorLabel>this field is required</FromErrorLabel>
+            <FromErrorLabel>{ t('fieldRequired') }</FromErrorLabel>
           ) : (
             <FromErrorLabel></FromErrorLabel>
           )}
           <FormFieldNameLabel>
-            <p>Description:</p>
+            <p>{ t('description') }</p>
           </FormFieldNameLabel>
           <textarea
             className="App-text-form-description"
@@ -106,12 +108,12 @@ const DishForm = ({ data = {}, onSubmit }) => {
             required
           />
           {!formData.description ? (
-            <FromErrorLabel>this field is required</FromErrorLabel>
+            <FromErrorLabel>{ t('fieldRequired') }</FromErrorLabel>
           ) : (
             <FromErrorLabel></FromErrorLabel>
           )}
           <FormFieldNameLabel>
-            <p>Category:</p>
+            <p>{ t('category') }</p>
           </FormFieldNameLabel>
           <select
             id="caregory"
@@ -127,12 +129,12 @@ const DishForm = ({ data = {}, onSubmit }) => {
             ))}
           </select>
           {!formData.category ? (
-            <FromErrorLabel>this field is required</FromErrorLabel>
+            <FromErrorLabel>{ t('fieldRequired') }</FromErrorLabel>
           ) : (
             <FromErrorLabel></FromErrorLabel>
           )}
           <FormFieldNameLabel>
-            <p>Observation:</p>
+            <p>{ t('observation') }</p>
           </FormFieldNameLabel>
           <textarea
             className="App-text-form-observation"
@@ -143,7 +145,7 @@ const DishForm = ({ data = {}, onSubmit }) => {
           />
           <div className="new-dish-form-form-price">
             <FormFieldNameLabel>
-              <p>Price:</p>
+              <p>{ t('price') }</p>
               <input
                 className="new-dish-form-form-price-price"
                 type="number"
@@ -154,13 +156,13 @@ const DishForm = ({ data = {}, onSubmit }) => {
                 required
               />
               {!formData.price ? (
-                <FromErrorLabel>this field is required</FromErrorLabel>
+                <FromErrorLabel>{ t('fieldRequired') }</FromErrorLabel>
               ) : (
                 <FromErrorLabel></FromErrorLabel>
               )}
             </FormFieldNameLabel>
             <FormFieldNameLabel>
-              <p>Currency:</p>
+              <p>{ t('currency') }</p>
               <input
                 className="new-dish-form-form-price-currency"
                 type="text"
@@ -171,26 +173,26 @@ const DishForm = ({ data = {}, onSubmit }) => {
                 required
               />
               {!formData.currency ? (
-                <FromErrorLabel>this field is required</FromErrorLabel>
+                <FromErrorLabel>{ t('fieldRequired') }</FromErrorLabel>
               ) : (
                 <FromErrorLabel></FromErrorLabel>
               )}
             </FormFieldNameLabel>
           </div>
           <ButtonCreateEdit disabled={data===formData} type="submit">
-            {data.name ? "Update" : "Create"}
+            {data.name ? t('update') : t('create') }
           </ButtonCreateEdit>
         </InputsDiv>
         {/* image inputs */}
         <ImageFormDiv>
           <FormFieldNameLabel className="new-dish-form-form-picture">
-            Picture:
+          { t('picture') }
           </FormFieldNameLabel>
           {!formData.image ? (
             <>
             <SelectImageInformationLable>
-              <label>Upload a refecence picture to your dish:</label>
-              <label>Allowed format jpeg/jpg</label>
+              <label>{ t('uploadReferencePicture') }</label>
+              <label>{ t('allowedPictureFormats') }</label>
               <FontAwesomeIcon icon={faCamera} />
               </SelectImageInformationLable>
             
@@ -203,7 +205,7 @@ const DishForm = ({ data = {}, onSubmit }) => {
               />
             
           )}
-          <ImageFormButtonLabel htmlFor="image_url"><FontAwesomeIcon icon={faCloudArrowUp} /><p>{!formData.image ? 'Upload': 'Change' }</p></ImageFormButtonLabel>
+          <ImageFormButtonLabel htmlFor="image_url"><FontAwesomeIcon icon={faCloudArrowUp} /><p>{!formData.image ?  t('upload') : t('change') }</p></ImageFormButtonLabel>
           <ImageInput
             type="file"
             id="image_url"

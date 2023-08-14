@@ -11,8 +11,8 @@ const DishList = () => {
 
   const { t } = useTranslation();
 
-  const [dishCategories, setDishCategories] = useContext(CategoriesContext);
-  const [toastVisible, setToastVisible, toastMessage, setToastMessage, toastType, setToastType] = useContext(ToastVisibilityContext)
+  const [dishCategories, ] = useContext(CategoriesContext);
+  const [toastVisible, , toastMessage, , toastType, ] = useContext(ToastVisibilityContext)
 
 
   useEffect(() => {}, [dishCategories]);

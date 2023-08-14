@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 import loginUser from "../services/loginUser.js";
 import getUserData from "../services/user/getUserData";
 import { Context, ToastVisibilityContext } from "../context/userContext";
+
 import {
   ButtonLogin,
   FormFieldNameLabel,
@@ -22,7 +23,7 @@ const UserLogin = () => {
   
   const [username, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
-  const [userData, setUserData] = useState([]);
+  const [ , setUserData] = useState([]);
 
   const [
     toastVisible,
@@ -35,7 +36,7 @@ const UserLogin = () => {
 
   const { key, csfrToken, userLoggedId, userLoggedName } = useContext(Context);
 
-  const [csfrTokenValue, setCsfrTokenValue] = csfrToken;
+  const [ , setCsfrTokenValue] = csfrToken;
   const [userLoggedKey, setUserLoggedkey] = key;
   const [userLoggedIdValue, setUserLoggedIdValue] = userLoggedId;
   const [userLoggedNameValue, setUserLoggedNameValue] = userLoggedName;
